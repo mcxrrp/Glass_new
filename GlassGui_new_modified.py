@@ -203,7 +203,7 @@ def onResize():
 
     if active_view == "View3DInventor":
         dock.show()
-        print ('a_w v3dI')
+        #print ('a_w v3dI')
         return
     if active_view == "View3DInventor" and active_workbench == "StartWorkbench":
         dock.setVisible(False)
