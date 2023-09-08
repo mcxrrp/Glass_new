@@ -18,19 +18,6 @@
 
 """Glass module for FreeCAD - Gui."""
 
-
-import FreeCAD
-import FreeCADGui as Gui
-from PySide.QtGui import QAction, QWidget
-from PySide.QtCore import Qt, QTimer
-from PySide import QtGui
-from PySide import QtCore
-
-# GPT advises: Consider using absolute imports to ensure compatibility across environments
-# GPT advises: Avoid wildcard imports for better code readability and maintainability
-
-# GPT advises: It's a good practice to separate import statements into different blocks based on their sources
-
 import FreeCAD
 import FreeCADGui as Gui
 from PySide.QtGui import QAction, QWidget
@@ -101,6 +88,7 @@ def applyGlass(boolean, widget):
         widget.setAttribute(QtCore.Qt.WA_TranslucentBackground, boolean)
     except:
         pass
+
     try:
         if boolean:
             widget.setStyleSheet("background:transparent; border:none; color:white;")
@@ -108,6 +96,7 @@ def applyGlass(boolean, widget):
             widget.setStyleSheet("")
     except:
         pass
+
     try:
         widget.setAutoFillBackground(boolean)
     except:
@@ -236,6 +225,11 @@ if p.GetBool("FirstRun", True):
     """Setup defaults on the first run."""
     firstRun()
     p.SetBool("FirstRun", False)
+
+if (not FreeCAD.Version().__contains__("LinkStage3")):
+    timer = QtCore.QTimer()
+    timer.timeout.connect(onStart)
+    timer.start(500)
 
 timer = QtCore.QTimer()
 timer.timeout.connect(onStart)
